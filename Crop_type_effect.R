@@ -21,17 +21,7 @@ dfsites_all$MZB_Typ1 <- as.factor(dfsites_all$MZB_Typ1) # (the river type)
 dfsites_all$Federal_State <- as.factor(dfsites_all$Federal_State) # (the German Federal state)
 dfsites_all$Datum_Phylib <- as.factor(dfsites_all$Datum_Phylib) # (The year of sampling for macrophytes and diatoms
 #names(dfsites_all)
-#2018
-dfsites_all$Cereals1     <- dfsites_all$Cat_WWH_18 +dfsites_all$Cat_WBA_18 + dfsites_all$Cat_SBA_18 + dfsites_all$Cat_OWC_18 + dfsites_all$Cat_OSC_18 +dfsites_all$Cat_SOA_18 + dfsites_all$Cat_WRY_18
-dfsites_all$Intensive_Cereals <- dfsites_all$Cat_WWH_18 +dfsites_all$Cat_WBA_18 + dfsites_all$Cat_SBA_18 + dfsites_all$Cat_OWC_18 + dfsites_all$Cat_OSC_18
-dfsites_all$Extensive_Cereals <- dfsites_all$Cat_SOA_18 + dfsites_all$Cat_WRY_18 
-dfsites_all$Permanent_crops   <- dfsites_all$Cat_GRP_18 + dfsites_all$Cat_ORC_18 + dfsites_all$Cat_HOP_18
-dfsites_all$Oilseeds       <- dfsites_all$Cat_WAR_18 + dfsites_all$Cat_SUN_18
-dfsites_all$Maize       <- dfsites_all$Cat_MAG_18 + dfsites_all$Cat_MAI_18
-dfsites_all$Grassland   <- dfsites_all$Cat_GRA_18
-dfsites_all$Vegetables  <- dfsites_all$Cat_SUB_18 + dfsites_all$Cat_POT_18 + dfsites_all$Cat_CAR_18 + dfsites_all$Cat_ASP_18 + dfsites_all$Cat_ONI_18 + dfsites_all$Cat_STR_18 + dfsites_all$Cat_LEG_18 + dfsites_all$Cat_OTV_18
-dfsites_all$Forest        <- dfsites_all$CatCropWald + dfsites_all$Cat_SWF_18
-dfsites_all$Urban       <- dfsites_all$CatCrop11P
+
 
 #
 
@@ -47,10 +37,26 @@ dfsites_all$Vegetables  <- dfsites_all$Cat_SUB_17 + dfsites_all$Cat_POT_17 + dfs
 dfsites_all$Forest        <- dfsites_all$CatCropWald + dfsites_all$Cat_SWF_17
 dfsites_all$Urban       <- dfsites_all$CatCrop11P
 
+#
+#2018 - be careful! this will overwrite ##########
+#########
+#########
+dfsites_all$Cereals1     <- dfsites_all$Cat_WWH_18 +dfsites_all$Cat_WBA_18 + dfsites_all$Cat_SBA_18 + dfsites_all$Cat_OWC_18 + dfsites_all$Cat_OSC_18 +dfsites_all$Cat_SOA_18 + dfsites_all$Cat_WRY_18
+dfsites_all$Intensive_Cereals <- dfsites_all$Cat_WWH_18 +dfsites_all$Cat_WBA_18 + dfsites_all$Cat_SBA_18 + dfsites_all$Cat_OWC_18 + dfsites_all$Cat_OSC_18
+dfsites_all$Extensive_Cereals <- dfsites_all$Cat_SOA_18 + dfsites_all$Cat_WRY_18 
+dfsites_all$Permanent_crops   <- dfsites_all$Cat_GRP_18 + dfsites_all$Cat_ORC_18 + dfsites_all$Cat_HOP_18
+dfsites_all$Oilseeds       <- dfsites_all$Cat_WAR_18 + dfsites_all$Cat_SUN_18
+dfsites_all$Maize       <- dfsites_all$Cat_MAG_18 + dfsites_all$Cat_MAI_18
+dfsites_all$Grassland   <- dfsites_all$Cat_GRA_18
+dfsites_all$Vegetables  <- dfsites_all$Cat_SUB_18 + dfsites_all$Cat_POT_18 + dfsites_all$Cat_CAR_18 + dfsites_all$Cat_ASP_18 + dfsites_all$Cat_ONI_18 + dfsites_all$Cat_STR_18 + dfsites_all$Cat_LEG_18 + dfsites_all$Cat_OTV_18
+dfsites_all$Forest        <- dfsites_all$CatCropWald + dfsites_all$Cat_SWF_18
+dfsites_all$Urban       <- dfsites_all$CatCrop11P
 #dfsites1
 dfsites1 <- dfsites_all[complete.cases(dfsites_all$Rivertype),]
-
-#please run them after each other cause they overwrite
+######
+##########
+#######
+#please run the organism groups after each other because otherwise the code will overwrite
 
 #invertebrates
 dfsites1<- na.omit(dfsites1[c("Cereals1","Intensive_Cereals","Extensive_Cereals","Permanent_crops",
