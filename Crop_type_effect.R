@@ -50,6 +50,8 @@ dfsites_all$Urban       <- dfsites_all$CatCrop11P
 #dfsites1
 dfsites1 <- dfsites_all[complete.cases(dfsites_all$Rivertype),]
 
+#please run them after each other cause they overwrite
+
 #invertebrates
 dfsites1<- na.omit(dfsites1[c("Cereals1","Intensive_Cereals","Extensive_Cereals","Permanent_crops",
                               "Oilseeds","Maize","Grassland","Vegetables","Forest","Urban", "AD_Ergebnis_HMWB", "Rivertype", "MZB_Typ1", "Year_Perlodes","Federal_State","Status")])
@@ -73,27 +75,40 @@ dfsites1$Forest <- dfsites1$Forest/100
 dfsites1$Urban <- dfsites1$Urban/100
 
 #invertebrates
-mod1 <-gamlss(AD_Ergebnis_HMWB~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
+mod1_inv <-gamlss(AD_Ergebnis_HMWB~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
                 Extensive_Cereals+Grassland+Urban+Forest+random(MZB_Typ1) + random(Year_Perlodes) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 
 
 #diatoms
-mod1 <-gamlss(Diatomeen_Index~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
+mod1_dia <-gamlss(Diatomeen_Index~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
                 Extensive_Cereals+Grassland+Urban+Forest+random(MZB_Typ1) + random(Datum_Phylib) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 #macrophytes
-mod1 <-gamlss(Index.Makrophyten~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
+mod1_mac <-gamlss(Index.Makrophyten~Permanent_crops+Vegetables+Maize+Intensive_Cereals+Oilseeds+
                 Extensive_Cereals+Grassland+Urban+Forest+random(MZB_Typ1) + random(Datum_Phylib) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 
+#plot invertebrates
 tiff("", units="in", width=9.4, height=7.3, res=500)
 
-plot(model_parameters(mod1),  show_labels = TRUE, size_text =5, size_point = 1)
+plot(model_parameters(mod1_inv),  show_labels = TRUE, size_text =5, size_point = 1)
 dev.off()
-parameters(mod1)
+#plot diatoms
 
-####################### reduced model
+tiff("", units="in", width=9.4, height=7.3, res=500)
+
+plot(model_parameters(mod1_dia),  show_labels = TRUE, size_text =5, size_point = 1)
+dev.off()
+
+#plot macrophytes
+tiff("", units="in", width=9.4, height=7.3, res=500)
+
+plot(model_parameters(mod1_mac),  show_labels = TRUE, size_text =5, size_point = 1)
+dev.off()
+
+
+####################### reduced model run them separately as they overwrite
 
 names(dfsites1)
 dfsites1 <- dfsites_all[complete.cases(dfsites_all$Rivertype),]
@@ -120,17 +135,19 @@ dfsites1$Urban <- dfsites1$Urban/100
 
 
 #Invertebrates
-mod1 <-gamlss(AD_Ergebnis_HMWB~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
+mod1_inv_red <-gamlss(AD_Ergebnis_HMWB~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
                 +random(MZB_Typ1) + random(Year_Perlodes) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 #macrophytes
-mod1 <-gamlss(Index.Makrophyten~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
+mod1_mac_red <-gamlss(Index.Makrophyten~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
                 +random(MZB_Typ1) + random(Datum_Phylib) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 #diatoms
-mod1 <-gamlss(Diatomeen_Index~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
+mod1_dia_red <-gamlss(Diatomeen_Index~Cat_Agri_without_grassl+Cat_GRA_17+Forest+Urban+
                 +random(MZB_Typ1) + random(Datum_Phylib) + random(Federal_State) + random(Status), 
               data=dfsites1, family =BEINF)
 
 
-parameters(mod1)
+parameters(mod1_inv_red)
+parameters(mod1_mac_red)
+parameters(mod1_dia_red)
