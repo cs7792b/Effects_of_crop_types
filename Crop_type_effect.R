@@ -15,11 +15,11 @@ library(parameters)
 dfsites_all <- read.csv(filepath0)
 dfsites_all <- dfsites_all[dfsites_all$Status != "AWB" ,] 
 
-dfsites_all$Status <- as.factor(dfsites_all$Status)
-dfsites_all$Year_Perlodes <- as.factor(dfsites_all$Year_Perlodes)
-dfsites_all$MZB_Typ1 <- as.factor(dfsites_all$MZB_Typ1)
-dfsites_all$Federal_State <- as.factor(dfsites_all$Federal_State)
-dfsites_all$Datum_Phylib <- as.factor(dfsites_all$Datum_Phylib)
+dfsites_all$Status <- as.factor(dfsites_all$Status) # category (whether natural or highlighly modified water bodies assessed)
+dfsites_all$Year_Perlodes <- as.factor(dfsites_all$Year_Perlodes) # (the year of sampling for macroinvertebrates)
+dfsites_all$MZB_Typ1 <- as.factor(dfsites_all$MZB_Typ1) # (the river type)
+dfsites_all$Federal_State <- as.factor(dfsites_all$Federal_State) # (the German Federal state)
+dfsites_all$Datum_Phylib <- as.factor(dfsites_all$Datum_Phylib) # (The year of sampling for macrophytes and diatoms
 #names(dfsites_all)
 #2018
 dfsites_all$Cereals1     <- dfsites_all$Cat_WWH_18 +dfsites_all$Cat_WBA_18 + dfsites_all$Cat_SBA_18 + dfsites_all$Cat_OWC_18 + dfsites_all$Cat_OSC_18 +dfsites_all$Cat_SOA_18 + dfsites_all$Cat_WRY_18
